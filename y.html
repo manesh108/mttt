@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dear Trisha</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to bottom, #ffe6f0, #fff5fa);
+      color: #4a2f2f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      text-align: center;
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-family: 'Caveat', cursive;
+      font-size: 2.5em;
+    }
+
+    .letter {
+      margin: 20px 0;
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+
+    .hearts {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .heart {
+      width: 40px;
+      height: 40px;
+      background-color: #ff99c8;
+      clip-path: polygon(
+        50% 0%, 61% 12%, 75% 12%, 88% 25%,
+        88% 37%, 75% 50%, 50% 75%, 25% 50%,
+        12% 37%, 12% 25%, 25% 12%, 39% 12%
+      );
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .heart:hover {
+      transform: scale(1.2);
+    }
+
+    .note, .hidden-message {
+      display: block;
+      margin-top: 20px;
+      font-style: italic;
+      color: #933;
+    }
+
+    button {
+      margin-top: 20px;
+      background-color: #ffb3c6;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* Sections */
+    .section {
+      margin-top: 40px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .hug-img {
+      width: 150px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .hug-img:hover {
+      transform: scale(1.1);
+    }
+
+    .snack-buttons button {
+      background-color: #ffd1dc;
+      border: none;
+      margin: 5px;
+      padding: 10px 15px;
+      font-size: 1em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .snack-buttons button:hover {
+      background-color: #ffadc1;
+    }
+
+    .flower-garden {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .flower {
+      font-size: 2em;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .flower:hover {
+      transform: scale(1.3);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Intro -->
+  <div class="container" id="intro">
+    <h1>Dear Trisha...</h1>
+    <p>This is for you, just because I love you and I care about you alot 🩷</p>
+    <button onclick="showLetter()">Open Letter</button>
+  </div>
+
+  <!-- Main Letter -->
+  <div class="container" id="main" style="display: none;">
+    <div class="letter">
+      <p>
+        I know your body’s working overtime right now, and it is not fair,  
+        but I just wanted to remind you how strong, beautiful, and amazing you are.
+      </p>
+      <p>
+        You’re allowed to rest, cry, laugh, snack, or do nothing at all.  
+        I’m always here, cheering you on, whether you’re glowing or curled up in bed.
+      </p>
+      <p>
+        You’ve got this — and I’ve got you. 💖  
+      </p>
+    </div>
+
+    <h3>Click a heart to reveal a little love note:</h3>
+    <div class="hearts">
+      <div class="heart" onclick="showNote(0)"></div>
+      <div class="heart" onclick="showNote(1)"></div>
+      <div class="heart" onclick="showNote(2)"></div>
+    </div>
+    <div class="note" id="note"></div>
+  </div>
+
+  <!-- HUG MACHINE -->
+  <div class="container section">
+    <h2>Need a Hug?</h2>
+    <img src="https://i.imgur.com/0v0Y6qq.png" alt="Hug Me" class="hug-img" onclick="sendHug()">
+    <p id="hugMessage" class="hidden-message"></p>
+  </div>
+
+  <!-- SNACK SHOP -->
+  <div class="container section">
+    <h2>Snack Shop for My Queen 🍪</h2>
+    <div class="snack-buttons">
+      <button onclick="orderSnack('Chocolate')">🍫 Chocolate</button>
+      <button onclick="orderSnack('Tea')">🍵 Hot Tea</button>
+      <button onclick="orderSnack('Brownies')">🍪 Brownies</button>
+      <button onclick="orderSnack('Juice')">🧃 Juice</button>
+      <button onclick="orderSnack('Cuddle')">🧸 A Cuddle</button>
+    </div>
+    <p id="snackMessage" class="hidden-message"></p>
+  </div>
+
+  <!-- FLOWER GARDEN -->
+  <div class="container section">
+    <h2>Garden of Love Notes 🌷</h2>
+    <div class="flower-garden">
+      <button class="flower" onclick="bloomNote(0)">🌸</button>
+      <button class="flower" onclick="bloomNote(1)">🌼</button>
+      <button class="flower" onclick="bloomNote(2)">🌻</button>
+      <button class="flower" onclick="bloomNote(3)">🌹</button>
+    </div>
+    <p id="flowerNote" class="hidden-message"></p>
+  </div>
+
+  <!-- Footer -->
+  <div style="text-align:center; padding: 20px; font-size: 0.9em;">
+    Made with love by Manesh💗
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const notes = [
+      "You’re stronger than any cramp.",
+      "I wish I could bring you a warm blanket and chocolate right now.",
+      "You don’t have to do anything to be loved, just be you. I exist just to love you."
+    ];
+
+    function showLetter() {
+      document.getElementById('intro').style.display = 'none';
+      document.getElementById('main').style.display = 'block';
+    }
+
+    function showNote(index) {
+      const noteDiv = document.getElementById('note');
+      noteDiv.innerText = notes[index];
+      noteDiv.style.display = 'block';
+    }
+
+    function sendHug() {
+      const messages = [
+        "You've got a warm, squishy hug from me 🤗",
+        "Virtual hugs? Better than nothing, right? 🧸",
+        "Hug delivered! Love included 💌"
+      ];
+      const msg = messages[Math.floor(Math.random() * messages.length)];
+      document.getElementById("hugMessage").innerText = msg;
+    }
+
+    function orderSnack(snack) {
+      const responses = {
+        Chocolate: "Your chocolate is on the way... virtual but sweet 🍫",
+        Tea: "Steeping some love into this hot tea ☕",
+        Brownies: "Soft comfort food loading 🍪",
+        Juice: "Juicy hug included with your drink 🧃",
+        Cuddle: "Snuggle-mode activated 🧸"
+      };
+      document.getElementById("snackMessage").innerText = responses[snack];
+    }
+
+    const flowerNotes = [
+      "You make everything bloom 🌸",
+      "Even when you're tired, you're beautiful 🌼",
+      "You're my sunshine in any season 🌻",
+      "You deserve to rest and feel loved 🌹"
+    ];
+
+    function bloomNote(index) {
+      document.getElementById("flowerNote").innerText = flowerNotes[index];
+    }
+  </script>
+</body>
+</html>
